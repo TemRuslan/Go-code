@@ -3,9 +3,9 @@ import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
-  // GitHub Pages project site: https://<user>.github.io/<repo>/
-  // We publish the built app under /go-code/index2/
-  // Repo name is "gocode" (GitHub redirects from Go-code).
-  base: "/gocode/index2/",
+  // Use a relative base so the same build works at:
+  // - https://<user>.github.io/<repo>/          (repo root)
+  // - https://<user>.github.io/<repo>/index2/   (subfolder)
+  base: "./",
   plugins: [react()],
 });

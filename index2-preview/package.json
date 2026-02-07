@@ -8,7 +8,7 @@
     "dev:sync": "cp ../index2.jsx src/App.jsx",
     "dev:watch": "chokidar \"../index2.jsx\" -c \"cp ../index2.jsx src/App.jsx\"",
     "dev:oneclick": "npm run dev:sync && concurrently -k -n watch,vite \"npm run dev:watch\" \"vite\"",
-    "build:pages": "npm run dev:sync && vite build && rm -rf ../index2 && cp -R dist ../index2 && : > ../index2/.nojekyll",
+    "build:pages": "npm run dev:sync && vite build",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
