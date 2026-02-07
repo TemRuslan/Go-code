@@ -135,7 +135,7 @@ if (window.__gocode_main_loaded) {
         {
           id: 2,
           slug: 'vr-simulators-industrial',
-          title: 'Иммерсивные VR‑симуляторы для промки: от идеи до стенда',
+          title: 'Иммерсивные VR‑симуляторы для промышленности: от идеи до стенда',
           category: 'VR Sim',
           image: 'https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?auto=format&fit=crop&q=80&w=1400',
           date: '07 Фев 2026',
@@ -152,7 +152,7 @@ if (window.__gocode_main_loaded) {
           category: '3D Atlas',
           image: 'https://images.unsplash.com/photo-1554475901-4538ddfbccc2?auto=format&fit=crop&q=80&w=1400',
           date: '07 Фев 2026',
-          excerpt: '3D‑атласы для промки, которые одинаково хорошо работают на ПК, iOS/Android и при необходимости “включают VR”.',
+          excerpt: '3D‑атласы для промышленности, которые одинаково хорошо работают на ПК, iOS/Android и при необходимости “включают VR”.',
           contentHtml:
             '<p>3D‑атлас помогает объяснять устройство оборудования, узлы, технологический процесс и обслуживание. Сильная сторона такого продукта: он масштабируется на разные аудитории и каналы.</p>' +
             '<p>Мы делаем кроссплатформенную реализацию: ПК, iPhone/iPad, Android‑устройства. При необходимости добавляем VR‑режим как отдельный сценарий, не ломая основную архитектуру.</p>' +
@@ -348,4 +348,3 @@ if (window.__gocode_main_loaded) {
     waitForPartials();
   })();
 }
-

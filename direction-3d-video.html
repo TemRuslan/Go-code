@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D‑ролики и обучающие материалы — Go-code</title>
+    <meta name="description" content="Go-code делает 3D‑ролики и обучающие материалы: объяснение оборудования и процессов, контент для промышленности и обучения персонала.">
+    <meta property="og:title" content="3D‑ролики — Go-code">
+    <meta property="og:description" content="3D‑видео и обучающий контент по оборудованию и процессам.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./images/favicon.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet">
+    <script src="./js/partials.js" defer></script>
+    <script src="./js/main.js" defer></script>
+</head>
+<body>
+    <div class="liquid-blob" style="top: -160px; left: -150px;"></div>
+    <div class="liquid-blob" style="bottom: -260px; right: -240px; background: rgba(59, 130, 246, 0.06);"></div>
+
+    <div id="site-header"></div>
+
+    <main class="pt-20">
+        <nav class="max-w-7xl mx-auto px-6 pt-4 text-sm text-gray-500" aria-label="Breadcrumb">
+            <ol class="flex flex-wrap items-center gap-2 list-none" role="list">
+                <li><a href="./index.html" class="hover:text-indigo-600 transition-colors">Главная</a></li>
+                <li aria-hidden="true" class="text-gray-300">/</li>
+                <li><a href="./directions.html" class="hover:text-indigo-600 transition-colors">Направления</a></li>
+                <li aria-hidden="true" class="text-gray-300">/</li>
+                <li class="text-gray-700 font-semibold" aria-current="page">3D‑ролики</li>
+            </ol>
+        </nav>
+
+        <section class="pt-10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                    <div>
+                        <div class="badge">Supporting • 3D</div>
+                        <h1 class="text-4xl md:text-6xl font-extrabold mt-5 leading-tight">
+                            3D‑ролики и <span class="gradient-text">обучающие материалы</span>
+                        </h1>
+                        <p class="text-gray-600 mt-5 text-lg leading-relaxed">
+                            3D‑видео для промышленности и обучения персонала: по оборудованию, процессам и безопасности. Часто это часть VR‑тренажера или 3D‑атласа.
+                        </p>
+                        <div class="mt-8">
+                            <a href="./index.html#contact" class="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-700 transition-colors inline-flex items-center gap-3">
+                                Запросить оценку
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="glass-card p-9">
+                        <h2 class="text-xl font-extrabold">Что делаем</h2>
+                        <ul class="mt-5 space-y-3 text-gray-700 font-semibold">
+                            <li class="flex gap-3"><i class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>Обучающие 3D‑видео (инструктажи, процедуры)</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>3D‑визуализация оборудования и процессов</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>Контент для VR‑обучения (как модуль)</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>Сценарий, сториборд, согласования, версияция</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>Озвучка/субтитры/локализация по запросу</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+                    <div class="glass-card p-8">
+                        <h3 class="text-xl font-extrabold">Кому подходит</h3>
+                        <p class="text-gray-600 mt-3">Обучение персонала, вводный инструктаж, техника безопасности, демонстрация оборудования и процессов для клиентов.</p>
+                    </div>
+                    <div class="glass-card p-8">
+                        <h3 class="text-xl font-extrabold">Результат</h3>
+                        <ul class="mt-4 space-y-2 text-gray-700 font-semibold">
+                            <li>Сценарий/сториборд и согласование</li>
+                            <li>Готовые ролики под ваши каналы и форматы</li>
+                            <li>Контент‑пак для продукта (если видео часть Unity‑приложения)</li>
+                            <li>Опционально: исходники и проектные файлы по договоренности</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8">
+                        <h3 class="text-xl font-extrabold">Пайплайн</h3>
+                        <p class="text-gray-600 mt-3">Моделирование, текстурирование, риг/анимация, рендер, композитинг. Если ролик идет в VR/Unity‑продукт, готовим ассеты сразу под оптимизацию (LOD, атласы текстур, запеченное освещение).</p>
+                    </div>
+                </div>
+
+                <div class="mt-14">
+                    <h2 class="text-2xl md:text-4xl font-extrabold mb-8">Мини‑кейс</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-card p-7">
+                            <div class="badge">NDA</div>
+                            <h3 class="text-xl font-extrabold mt-4">3D‑видео для РЖД</h3>
+                            <p class="text-gray-600 mt-3">Обучающие ролики (под NDA) для подготовки персонала.</p>
+                        </div>
+                        <div class="glass-card p-7">
+                            <div class="badge">Industrial</div>
+                            <h3 class="text-xl font-extrabold mt-4">Контент для обучения по оборудованию</h3>
+                            <p class="text-gray-600 mt-3">Разбор узлов, последовательности операций, безопасные действия.</p>
+                        </div>
+                        <div class="glass-card p-7">
+                            <div class="badge">3D Atlas</div>
+                            <h3 class="text-xl font-extrabold mt-4">Видеомодуль в составе продукта</h3>
+                            <p class="text-gray-600 mt-3">Встраиваем 3D‑видео в 3D‑атласы и Unity‑приложения.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-14 text-center">
+                    <a href="./index.html#contact" class="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-700 transition-colors inline-flex items-center gap-3">
+                        Обсудить 3D‑ролик
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Направления разработки — Go-code</title>
+    <meta name="description" content="Основные направления Go-code: VR‑тренажеры, VR‑симуляторы и 3D‑атласы на Unity. Дополнительно: 360‑туры, игры, приложения, сайты, 3D‑видео.">
+    <meta property="og:title" content="Направления — Go-code">
+    <meta property="og:description" content="Core: VR‑тренажеры, VR‑симуляторы, 3D‑атласы. Supporting: Unity 360, мобайл, web, 3D‑видео.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./images/favicon.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet">
+    <script src="./js/partials.js" defer></script>
+    <script src="./js/main.js" defer></script>
+</head>
+<body>
+    <div class="liquid-blob" style="top: -120px; right: -120px;"></div>
+    <div class="liquid-blob" style="bottom: -200px; left: -200px; background: rgba(59, 130, 246, 0.05);"></div>
+
+    <div id="site-header"></div>
+
+    <main class="pt-20">
+        <nav class="max-w-7xl mx-auto px-6 pt-4 text-sm text-gray-500" aria-label="Breadcrumb">
+            <ol class="flex flex-wrap items-center gap-2 list-none" role="list">
+                <li><a href="./index.html" class="hover:text-indigo-600 transition-colors">Главная</a></li>
+                <li aria-hidden="true" class="text-gray-300">/</li>
+                <li class="text-gray-700 font-semibold" aria-current="page">Направления</li>
+            </ol>
+        </nav>
+
+        <section class="pt-10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-14">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+                        Направления <span class="gradient-text">разработки</span>
+                    </h1>
+                    <p class="text-gray-500 max-w-3xl mx-auto">
+                        Мы специализируемся на VR/3D/Unity. Остальные направления закрываем как часть продукта, не размывая фокус.
+                    </p>
+                </div>
+
+                <div class="mb-10 flex items-end justify-between gap-6">
+                    <div>
+                        <div class="badge">Core</div>
+                        <h2 class="text-2xl md:text-4xl font-extrabold mt-4">Сильные стороны</h2>
+                        <p class="text-gray-600 mt-3 max-w-2xl">Там, где требуется качество и инженерная дисциплина.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <a href="./direction-vr-trainers.html" class="glass-card glow-border p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">VR Training</div>
+                        <h3 class="text-2xl font-extrabold mt-4">VR‑тренажеры</h3>
+                        <p class="text-gray-600 mt-3">Сценарии обучения, контроль ошибок, UX, оптимизация под целевые устройства.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                    <a href="./direction-vr-simulators.html" class="glass-card glow-border p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">VR Sim</div>
+                        <h3 class="text-2xl font-extrabold mt-4">VR‑симуляторы</h3>
+                        <p class="text-gray-600 mt-3">Иммерсивные симуляции и промо‑опыты, готовые к стенду и эксплуатации.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                    <a href="./direction-3d-atlases.html" class="glass-card glow-border p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">3D Atlas</div>
+                        <h3 class="text-2xl font-extrabold mt-4">3D‑атласы</h3>
+                        <p class="text-gray-600 mt-3">3D‑продукты для промышленности: кроссплатформа и опциональный VR‑режим.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                </div>
+
+                <div class="mb-10 flex items-end justify-between gap-6">
+                    <div>
+                        <div class="badge">Supporting</div>
+                        <h2 class="text-2xl md:text-4xl font-extrabold mt-4">Дополнительные компетенции</h2>
+                        <p class="text-gray-600 mt-3 max-w-2xl">Закрываем задачи вокруг ядра, чтобы продукт был цельным.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <a href="./direction-unity-360.html" class="glass-card p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">Unity</div>
+                        <h3 class="text-xl font-extrabold mt-4">Софт на Unity и 360‑туры</h3>
+                        <p class="text-gray-600 mt-3">Интерактивные 360‑туры, презентационные продукты и кастомный софт на Unity.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                    <a href="./direction-mobile-games.html" class="glass-card p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">Games</div>
+                        <h3 class="text-xl font-extrabold mt-4">Мобильная разработка игр</h3>
+                        <p class="text-gray-600 mt-3">Android/iOS, продакшн‑пайплайн, аналитика и поддержка релиза.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                    <a href="./direction-mobile-apps.html" class="glass-card p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">Mobile</div>
+                        <h3 class="text-xl font-extrabold mt-4">Мобильные приложения</h3>
+                        <p class="text-gray-600 mt-3">Android / iOS приложения, включая 3D и интеграции по требованию.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                    <a href="./direction-expo-apps.html" class="glass-card p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">Expo</div>
+                        <h3 class="text-xl font-extrabold mt-4">Приложения для выставок</h3>
+                        <p class="text-gray-600 mt-3">Стендовая активность: интерактивные презентации, управление, стабильность.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                    <a href="./direction-websites.html" class="glass-card p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">Web</div>
+                        <h3 class="text-xl font-extrabold mt-4">Разработка сайтов</h3>
+                        <p class="text-gray-600 mt-3">Сайты и лендинги как часть продуктовой упаковки. Кейсы и ссылки показываем по запросу.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                    <a href="./direction-3d-video.html" class="glass-card p-8 hover:shadow-lg transition-shadow">
+                        <div class="badge">3D</div>
+                        <h3 class="text-xl font-extrabold mt-4">3D‑ролики и обучающие материалы</h3>
+                        <p class="text-gray-600 mt-3">3D‑видео и обучающий контент, в том числе по оборудованию для производств.</p>
+                        <div class="mt-6 text-indigo-600 font-bold text-sm">Подробнее →</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+</body>
+</html>

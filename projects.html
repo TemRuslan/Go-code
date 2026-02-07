@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты — Go-code</title>
+    <meta name="description" content="Проекты Go-code: VR‑тренажеры, VR‑симуляторы, 3D‑атласы, игры и промышленные продукты на Unity. Часть кейсов под NDA.">
+    <meta property="og:title" content="Проекты — Go-code">
+    <meta property="og:description" content="Кейсы VR/3D/Unity: тренажеры, симуляторы, 3D‑атласы, игры, промо.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./images/favicon.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet">
+    <script src="./js/partials.js" defer></script>
+    <script src="./js/main.js" defer></script>
+</head>
+<body>
+    <div class="liquid-blob" style="top: -120px; left: -160px;"></div>
+    <div class="liquid-blob" style="bottom: -240px; right: -220px; background: rgba(59, 130, 246, 0.06);"></div>
+
+    <div id="site-header"></div>
+
+    <main class="pt-20">
+        <nav class="max-w-7xl mx-auto px-6 pt-4 text-sm text-gray-500" aria-label="Breadcrumb">
+            <ol class="flex flex-wrap items-center gap-2 list-none" role="list">
+                <li><a href="./index.html" class="hover:text-indigo-600 transition-colors">Главная</a></li>
+                <li aria-hidden="true" class="text-gray-300">/</li>
+                <li class="text-gray-700 font-semibold" aria-current="page">Проекты</li>
+            </ol>
+        </nav>
+
+        <section class="pt-10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+                        Реализованные <span class="gradient-text">проекты</span>
+                    </h1>
+                    <p class="text-gray-500 max-w-3xl mx-auto">
+                        Часть кейсов под NDA. Мы показываем формат работы и тип результата: обучение, промо, продукт, кроссплатформа.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-3 justify-center mb-10">
+                    <button class="filter-btn" data-project-filter="all" type="button">Все</button>
+                    <button class="filter-btn" data-project-filter="vr" type="button">VR (тренажеры/симуляторы)</button>
+                    <button class="filter-btn" data-project-filter="atlas" type="button">3D‑атласы</button>
+                    <button class="filter-btn" data-project-filter="games" type="button">Игры</button>
+                    <button class="filter-btn" data-project-filter="industrial" type="button">Промышленность/3D‑видео</button>
+                    <button class="filter-btn" data-project-filter="web" type="button">Сайты</button>
+                </div>
+
+                <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass-card p-7" data-project-tags="industrial">
+                        <div class="badge">NDA • 3D</div>
+                        <h3 class="text-xl font-extrabold mt-4">Обучающие 3D‑видео для РЖД</h3>
+                        <p class="text-gray-600 mt-3">3D‑контент и сценарная подача для обучения персонала (под NDA).</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: Промышленность / 3D‑видео</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="vr,industrial">
+                        <div class="badge">NDA • VR Training</div>
+                        <h3 class="text-xl font-extrabold mt-4">Программа‑тренажер для РЖД</h3>
+                        <p class="text-gray-600 mt-3">Unity‑приложение с взаимодействиями и контролем ошибок (под NDA).</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: VR‑тренажер</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="atlas,industrial">
+                        <div class="badge">3D Atlas</div>
+                        <h3 class="text-xl font-extrabold mt-4">3D‑атлас для БелАЗ</h3>
+                        <p class="text-gray-600 mt-3">Интерактивный атлас узлов: навигация, разборка, подписи.</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: 3D‑атлас</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="vr">
+                        <div class="badge">VR Sim</div>
+                        <h3 class="text-xl font-extrabold mt-4">Иммерсивный VR‑симулятор образа жизни</h3>
+                        <p class="text-gray-600 mt-3">Сценарий “плохого/хорошего”: интерактив, постановка, стабильность.</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: VR‑симулятор</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="games">
+                        <div class="badge">Play Market</div>
+                        <h3 class="text-xl font-extrabold mt-4">2 игры в Play Market</h3>
+                        <p class="text-gray-600 mt-3">Одна из игр достигла ~5 000 000 игроков и активно продается.</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: Игры</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="games">
+                        <div class="badge">Games</div>
+                        <h3 class="text-xl font-extrabold mt-4">Космический проект</h3>
+                        <p class="text-gray-600 mt-3">Суммарно ~1 000 000 игроков. Продакшн и поддержка.</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: Игры</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="games">
+                        <div class="badge">Games</div>
+                        <h3 class="text-xl font-extrabold mt-4">Еще 2 игры (демо/публичные)</h3>
+                        <p class="text-gray-600 mt-3">Проекты поменьше, но с отлаженным пайплайном релиза.</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: Игры</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="games">
+                        <div class="badge">History</div>
+                        <h3 class="text-xl font-extrabold mt-4">Всего 26 игр (исторически)</h3>
+                        <p class="text-gray-600 mt-3">Опыт в продакшне игр помогает делать VR‑продукты быстрыми и стабильными.</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: Игры</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="industrial">
+                        <div class="badge">Expo</div>
+                        <h3 class="text-xl font-extrabold mt-4">Приложения для выставок и презентаций</h3>
+                        <p class="text-gray-600 mt-3">Стендовая активность: интерактив, управление, надежный “киоск‑режим”.</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: Выставки / презентации</div>
+                    </div>
+
+                    <div class="glass-card p-7" data-project-tags="web">
+                        <div class="badge">Web</div>
+                        <h3 class="text-xl font-extrabold mt-4">Сайты и лендинги</h3>
+                        <p class="text-gray-600 mt-3">Делаем web как часть упаковки XR/3D‑продукта. Кейсы и ссылки показываем по запросу (часть под NDA).</p>
+                        <div class="text-gray-400 text-xs font-bold uppercase mt-6">Категория: Сайты</div>
+                    </div>
+                </div>
+
+                <div class="mt-14 text-center">
+                    <a href="./index.html#contact" class="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-700 transition-colors inline-flex items-center gap-3">
+                        Обсудить ваш проект
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+</body>
+</html>
