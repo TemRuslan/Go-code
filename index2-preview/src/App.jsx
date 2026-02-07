@@ -117,34 +117,41 @@ const App = () => {
 
   const current = getContent();
 
+  // Общий компонент кнопок переключателя
+  const ModeSwitcher = ({ isMobile = false }) => (
+    <div className={`flex bg-slate-200/50 backdrop-blur-md p-1.5 rounded-full border border-slate-200 ${isMobile ? 'flex-row w-full justify-between' : 'mx-4'}`}>
+      <button 
+        onClick={() => { setViewMode('b2b'); if(isMobile) setIsMobileMenuOpen(false); }}
+        className={`px-4 sm:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap flex-1 lg:flex-none ${viewMode === 'b2b' ? 'bg-white text-blue-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
+      >
+        B2B
+      </button>
+      <button 
+        onClick={() => { setViewMode('games'); if(isMobile) setIsMobileMenuOpen(false); }}
+        className={`px-4 sm:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap flex-1 lg:flex-none ${viewMode === 'games' ? 'bg-white text-indigo-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
+      >
+        Gamedev
+      </button>
+      <button 
+        onClick={() => { setViewMode('web'); if(isMobile) setIsMobileMenuOpen(false); }}
+        className={`px-4 sm:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap flex-1 lg:flex-none ${viewMode === 'web' ? 'bg-white text-violet-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
+      >
+        Web
+      </button>
+    </div>
+  );
+
   const Navbar = () => (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-xl py-3 shadow-sm' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen ? 'bg-white/80 backdrop-blur-xl py-3 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-3 shrink-0">
           <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold text-xl">G</div>
           <span className="text-2xl font-bold text-slate-900 tracking-tight">Go Gravity</span>
         </div>
 
-        {/* Переключатель: px-6 py-2 обеспечивает сбалансированные отступы со всех сторон */}
-        <div className="hidden lg:flex bg-slate-200/50 backdrop-blur-md p-1.5 rounded-full border border-slate-200 mx-4">
-          <button 
-            onClick={() => setViewMode('b2b')}
-            className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap ${viewMode === 'b2b' ? 'bg-white text-blue-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
-          >
-            B2B Решения
-          </button>
-          <button 
-            onClick={() => setViewMode('games')}
-            className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap ${viewMode === 'games' ? 'bg-white text-indigo-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
-          >
-            Gamedev
-          </button>
-          <button 
-            onClick={() => setViewMode('web')}
-            className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap ${viewMode === 'web' ? 'bg-white text-violet-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
-          >
-            Web разработка
-          </button>
+        {/* Переключатель для десктопа */}
+        <div className="hidden lg:block">
+          <ModeSwitcher />
         </div>
 
         <div className="hidden md:flex items-center gap-8 shrink-0">
@@ -154,10 +161,28 @@ const App = () => {
           </button>
         </div>
 
-        <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        {/* Кнопка меню для мобилок */}
+        <button className="lg:hidden p-2 text-slate-900" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
+
+      {/* Мобильное выпадающее меню */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 p-6 space-y-8 animate-in slide-in-from-top duration-300 shadow-2xl">
+          <div className="space-y-4">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Выберите направление:</span>
+            <ModeSwitcher isMobile={true} />
+          </div>
+          <div className="flex flex-col gap-4">
+             <a href="#" className="text-lg font-bold text-slate-900 p-2 border-b border-slate-50">Проекты</a>
+             <a href="#" className="text-lg font-bold text-slate-900 p-2 border-b border-slate-50">О компании</a>
+             <button className={`w-full py-4 rounded-2xl font-bold text-white ${currentTheme.accentBg} ${currentTheme.shadow}`}>
+               Начать проект
+             </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 
@@ -167,6 +192,15 @@ const App = () => {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 lg:pt-56 md:pb-32 px-6 overflow-hidden">
+        
+        {/* Мобильный переключатель (всегда виден в начале страницы для UX) */}
+        <div className="lg:hidden max-w-sm mx-auto mb-12">
+            <div className="p-1 bg-white/50 backdrop-blur-sm rounded-full border border-white/80 shadow-sm">
+                <ModeSwitcher isMobile={true} />
+            </div>
+            <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">Нажмите на направление выше</p>
+        </div>
+
         <div className="absolute inset-0 -z-10 pointer-events-none">
           <div className={`absolute -top-20 -right-20 w-[600px] h-[600px] transition-all duration-1000 blur-[120px] rounded-full mix-blend-multiply opacity-50 ${
             viewMode === 'b2b' ? 'bg-blue-200' : viewMode === 'games' ? 'bg-indigo-200' : 'bg-violet-200'
@@ -190,7 +224,7 @@ const App = () => {
               </span>
             </h1>
             
-            <p className="text-xl text-slate-500 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+            <p className="text-lg sm:text-xl text-slate-500 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
               {current.description}
             </p>
 
