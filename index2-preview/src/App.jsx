@@ -117,27 +117,44 @@ const App = () => {
 
   const current = getContent();
 
-  // Общий компонент кнопок переключателя
-  const ModeSwitcher = ({ isMobile = false }) => (
-    <div className={`flex bg-slate-200/50 backdrop-blur-md p-1.5 rounded-full border border-slate-200 ${isMobile ? 'flex-row w-full justify-between' : 'mx-4'}`}>
-      <button 
-        onClick={() => { setViewMode('b2b'); if(isMobile) setIsMobileMenuOpen(false); }}
-        className={`px-4 sm:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap flex-1 lg:flex-none ${viewMode === 'b2b' ? 'bg-white text-blue-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
-      >
-        B2B
-      </button>
-      <button 
-        onClick={() => { setViewMode('games'); if(isMobile) setIsMobileMenuOpen(false); }}
-        className={`px-4 sm:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap flex-1 lg:flex-none ${viewMode === 'games' ? 'bg-white text-indigo-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
-      >
-        Gamedev
-      </button>
-      <button 
-        onClick={() => { setViewMode('web'); if(isMobile) setIsMobileMenuOpen(false); }}
-        className={`px-4 sm:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap flex-1 lg:flex-none ${viewMode === 'web' ? 'bg-white text-violet-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
-      >
-        Web
-      </button>
+  // Десктопный переключатель в навигации
+  const DesktopModeSwitcher = () => (
+    <div className="hidden lg:flex bg-slate-200/50 backdrop-blur-md p-1 rounded-full border border-slate-200 mx-4">
+      {['b2b', 'games', 'web'].map((mode) => (
+        <button 
+          key={mode}
+          onClick={() => setViewMode(mode)}
+          className={`px-6 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 ${viewMode === mode ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+        >
+          {mode === 'b2b' ? 'B2B' : mode === 'games' ? 'Gamedev' : 'Web'}
+        </button>
+      ))}
+    </div>
+  );
+
+  // Мобильный переключатель (прикреплен к низу)
+  const MobileFloatingSwitcher = () => (
+    <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-sm">
+      <div className="bg-white/80 backdrop-blur-2xl p-1.5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/50 flex justify-between gap-1">
+        {[
+          { id: 'b2b', label: 'B2B', icon: <Cpu size={16}/> },
+          { id: 'games', label: 'Игры', icon: <Gamepad2 size={16}/> },
+          { id: 'web', label: 'Web', icon: <Globe size={16}/> }
+        ].map((item) => (
+          <button 
+            key={item.id}
+            onClick={() => setViewMode(item.id)}
+            className={`flex-1 flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl transition-all duration-500 ${
+              viewMode === item.id 
+                ? `${currentTheme.accentBg} text-white shadow-lg scale-[1.02]` 
+                : 'text-slate-400'
+            }`}
+          >
+            {item.icon}
+            <span className="text-[10px] font-bold uppercase tracking-tighter">{item.label}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 
@@ -149,10 +166,7 @@ const App = () => {
           <span className="text-2xl font-bold text-slate-900 tracking-tight">Go Gravity</span>
         </div>
 
-        {/* Переключатель для десктопа */}
-        <div className="hidden lg:block">
-          <ModeSwitcher />
-        </div>
+        <DesktopModeSwitcher />
 
         <div className="hidden md:flex items-center gap-8 shrink-0">
           <a href="#" className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Проекты</a>
@@ -161,52 +175,36 @@ const App = () => {
           </button>
         </div>
 
-        {/* Кнопка меню для мобилок */}
         <button className="lg:hidden p-2 text-slate-900" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Мобильное выпадающее меню */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 p-6 space-y-8 animate-in slide-in-from-top duration-300 shadow-2xl">
-          <div className="space-y-4">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Выберите направление:</span>
-            <ModeSwitcher isMobile={true} />
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 p-8 space-y-8 shadow-2xl animate-in slide-in-from-top duration-300">
+           <div className="flex flex-col gap-6">
+             <a href="#" className="text-2xl font-black text-slate-900">Проекты</a>
+             <a href="#" className="text-2xl font-black text-slate-900">О компании</a>
+             <a href="#" className="text-2xl font-black text-slate-900">Контакты</a>
           </div>
-          <div className="flex flex-col gap-4">
-             <a href="#" className="text-lg font-bold text-slate-900 p-2 border-b border-slate-50">Проекты</a>
-             <a href="#" className="text-lg font-bold text-slate-900 p-2 border-b border-slate-50">О компании</a>
-             <button className={`w-full py-4 rounded-2xl font-bold text-white ${currentTheme.accentBg} ${currentTheme.shadow}`}>
-               Начать проект
-             </button>
-          </div>
+          <button className={`w-full py-5 rounded-2xl font-bold text-white text-lg ${currentTheme.accentBg} ${currentTheme.shadow}`}>
+            Связаться с нами
+          </button>
         </div>
       )}
     </nav>
   );
 
   return (
-    <div className={`min-h-screen font-sans text-slate-900 overflow-x-hidden transition-colors duration-1000 bg-gradient-to-br ${currentTheme.bgGradient}`}>
+    <div className={`min-h-screen font-sans text-slate-900 overflow-x-hidden transition-colors duration-1000 bg-gradient-to-br pb-24 lg:pb-0 ${currentTheme.bgGradient}`}>
       <Navbar />
+      <MobileFloatingSwitcher />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 lg:pt-56 md:pb-32 px-6 overflow-hidden">
-        
-        {/* Мобильный переключатель (всегда виден в начале страницы для UX) */}
-        <div className="lg:hidden max-w-sm mx-auto mb-12">
-            <div className="p-1 bg-white/50 backdrop-blur-sm rounded-full border border-white/80 shadow-sm">
-                <ModeSwitcher isMobile={true} />
-            </div>
-            <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">Нажмите на направление выше</p>
-        </div>
-
         <div className="absolute inset-0 -z-10 pointer-events-none">
           <div className={`absolute -top-20 -right-20 w-[600px] h-[600px] transition-all duration-1000 blur-[120px] rounded-full mix-blend-multiply opacity-50 ${
             viewMode === 'b2b' ? 'bg-blue-200' : viewMode === 'games' ? 'bg-indigo-200' : 'bg-violet-200'
-          }`} />
-          <div className={`absolute top-1/2 -left-20 w-[400px] h-[400px] transition-all duration-1000 blur-[100px] rounded-full mix-blend-multiply opacity-40 ${
-            viewMode === 'b2b' ? 'bg-cyan-100' : viewMode === 'games' ? 'bg-purple-200' : 'bg-fuchsia-100'
           }`} />
         </div>
 
@@ -241,18 +239,13 @@ const App = () => {
             </div>
           </div>
 
-          <div className="flex-1 relative w-full max-w-2xl perspective-1000 group mx-auto">
-            <div className="relative z-10 w-full aspect-square rounded-[3.5rem] bg-white/40 border border-white/80 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] p-1 flex items-center justify-center overflow-hidden transition-all duration-700 group-hover:shadow-3xl">
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent" />
-              
+          <div className="flex-1 relative w-full max-w-2xl group mx-auto">
+            <div className="relative z-10 w-full aspect-square rounded-[3.5rem] bg-white/40 border border-white/80 backdrop-blur-2xl shadow-xl p-1 flex items-center justify-center overflow-hidden transition-all duration-700">
               <div className={`w-48 h-48 sm:w-64 sm:h-64 relative transition-all duration-1000 ${
                 viewMode === 'b2b' ? 'rotate-0' : viewMode === 'games' ? 'rotate-[135deg]' : 'rotate-[225deg]'
               }`}>
                 <div className={`absolute inset-0 border-[20px] rounded-[3rem] opacity-20 transition-all duration-700 ${
                   viewMode === 'b2b' ? 'border-blue-500' : viewMode === 'games' ? 'border-indigo-500' : 'border-violet-500'
-                }`} />
-                <div className={`absolute inset-8 sm:inset-10 border-[15px] rounded-[2rem] opacity-40 transition-all duration-700 ${
-                  viewMode === 'b2b' ? 'border-blue-400' : viewMode === 'games' ? 'border-indigo-400' : 'border-violet-400'
                 }`} />
                 <div className={`absolute inset-16 sm:inset-20 bg-gradient-to-br rounded-2xl shadow-2xl transition-all duration-1000 ${
                   viewMode === 'b2b' ? 'from-blue-500 to-indigo-600 scale-100' : 
@@ -261,13 +254,13 @@ const App = () => {
                 }`} />
               </div>
 
-              <div className="absolute bottom-8 left-8 right-8 sm:bottom-12 sm:left-12 sm:right-12 p-5 sm:p-6 rounded-3xl bg-white/60 border border-white/40 backdrop-blur-md transition-all duration-500 group-hover:translate-y-2">
+              <div className="absolute bottom-8 left-8 right-8 sm:bottom-12 sm:left-12 sm:right-12 p-5 sm:p-6 rounded-3xl bg-white/60 border border-white/40 backdrop-blur-md">
                 <div className="flex justify-between items-center">
                   <div>
                     <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider mb-1">Status</div>
                     <div className="flex items-center gap-2 font-bold text-sm sm:text-base text-slate-800">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                      {viewMode === 'b2b' ? 'Active Production' : viewMode === 'games' ? 'Studio Online' : 'Cloud Synchronized'}
+                      {viewMode === 'b2b' ? 'Production' : viewMode === 'games' ? 'Studio Live' : 'Cloud Sync'}
                     </div>
                   </div>
                   <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-white transition-all duration-700 ${currentTheme.accentBg}`}>
@@ -281,9 +274,9 @@ const App = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-32 px-6 relative transition-colors duration-1000 bg-white/50 backdrop-blur-3xl">
+      <section className="py-24 px-6 relative transition-colors duration-1000 bg-white/50 backdrop-blur-3xl">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-20 space-y-4 text-center lg:text-left mx-auto lg:mx-0">
+          <div className="max-w-2xl mb-16 space-y-4 text-center lg:text-left mx-auto lg:mx-0">
             <h2 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight transition-all">
               {viewMode === 'b2b' ? 'Промышленные решения' : viewMode === 'games' ? 'Игровая разработка' : 'Web & Cloud решения'}
             </h2>
@@ -291,40 +284,32 @@ const App = () => {
               {viewMode === 'b2b' 
                 ? 'Мы автоматизируем обучение и проектирование через VR-технологии.' 
                 : viewMode === 'games' 
-                ? 'Создаем миры, в которые хочется возвращаться. Unity-экспертиза мирового уровня.' 
-                : 'Проектируем архитектуру, которая растет вместе с вашим бизнесом.'}
+                ? 'Создаем миры, в которые хочется возвращаться.' 
+                : 'Проектируем архитектуру, которая растет вместе с бизнесом.'}
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {current.services.map((service, idx) => (
               <div 
                 key={idx}
-                className={`group p-8 lg:p-10 rounded-[2.5rem] border transition-all duration-500 hover:-translate-y-3 flex flex-col justify-between min-h-[340px] lg:h-[380px] ${
+                className={`group p-8 rounded-[2.5rem] border transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between min-h-[300px] ${
                   service.highlight 
-                  ? `${currentTheme.accentLight} ${currentTheme.border} shadow-xl`
-                  : 'bg-white/70 border-slate-100 hover:shadow-2xl'
+                  ? `${currentTheme.accentLight} ${currentTheme.border} shadow-lg`
+                  : 'bg-white/70 border-slate-100'
                 }`}
               >
                 <div>
-                  <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${
-                    service.highlight 
-                    ? `${currentTheme.accentBg} text-white ${currentTheme.shadow}`
-                    : 'bg-slate-100 text-slate-600'
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 ${
+                    service.highlight ? `${currentTheme.accentBg} text-white shadow-lg` : 'bg-slate-100 text-slate-600'
                   }`}>
                     {service.icon}
                   </div>
-                  <h3 className="text-xl lg:text-2xl font-bold mb-4 tracking-tight">{service.title}</h3>
-                  <p className="text-slate-500 text-sm lg:text-base leading-relaxed">
-                    {service.description}
-                  </p>
+                  <h3 className="text-xl font-bold mb-3 tracking-tight">{service.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{service.description}</p>
                 </div>
-                <div className={`w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:border-transparent transition-all duration-300 self-end ${
-                  viewMode === 'b2b' ? 'group-hover:bg-blue-600 group-hover:text-white' : 
-                  viewMode === 'games' ? 'group-hover:bg-indigo-600 group-hover:text-white' : 
-                  'group-hover:bg-violet-600 group-hover:text-white'
-                }`}>
-                  <ArrowRight size={20} />
+                <div className={`w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-all self-end`}>
+                  <ArrowRight size={16} />
                 </div>
               </div>
             ))}
@@ -332,95 +317,21 @@ const App = () => {
         </div>
       </section>
 
-      {/* Dynamic Content Block */}
-      <section className="pb-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          {viewMode === 'b2b' ? (
-            <div className="bg-slate-900 rounded-[3rem] lg:rounded-[4rem] p-8 md:p-16 lg:p-20 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center overflow-hidden relative shadow-3xl animate-in fade-in zoom-in duration-700">
-              <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none" />
-              <div className="flex-1 space-y-8 relative z-10 text-center lg:text-left">
-                <div className="text-blue-400 font-bold tracking-[0.3em] text-[10px] uppercase italic">#High-Performance</div>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1]">3D Атласы нового поколения</h2>
-                <p className="text-slate-400 text-lg lg:text-xl leading-relaxed">Замена бумажной документации интерактивными цифровыми копиями.</p>
-                <button className="px-10 py-5 bg-white text-slate-900 rounded-2xl font-bold hover:bg-blue-500 hover:text-white transition-all text-lg">Запросить демо</button>
-              </div>
-              <div className="flex-1 w-full bg-slate-800/50 rounded-3xl p-4 border border-slate-700/50 backdrop-blur-sm">
-                <div className="aspect-video rounded-2xl bg-slate-900 overflow-hidden flex items-center justify-center">
-                   <div className="text-slate-700 font-mono text-xs sm:text-sm">[ 3D VIEWER ACTIVE ]</div>
-                </div>
-              </div>
-            </div>
-          ) : viewMode === 'games' ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom duration-700">
-              {[
-                { val: "5M+", lab: "Игроков в хитах", color: "text-indigo-600" },
-                { val: "1M+", lab: "Active Users", color: "text-purple-600" },
-                { val: "26+", lab: "Live Projects", color: "text-blue-600" }
-              ].map((stat, i) => (
-                <div key={i} className="bg-white/80 border border-slate-100 p-10 lg:p-12 rounded-[2.5rem] lg:rounded-[3.5rem] text-center shadow-sm hover:shadow-xl transition-all backdrop-blur-md">
-                  <div className={`text-4xl lg:text-5xl font-black mb-4 ${stat.color}`}>{stat.val}</div>
-                  <div className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">{stat.lab}</div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-violet-950 rounded-[3rem] lg:rounded-[4rem] p-8 md:p-16 lg:p-20 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center overflow-hidden relative shadow-3xl animate-in fade-in zoom-in duration-700">
-               <div className="flex-1 space-y-8 relative z-10 text-center lg:text-left">
-                <div className="text-violet-400 font-bold tracking-[0.3em] text-[10px] uppercase italic">#Modern-Stack</div>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1]">Scalable Web Ecosystems</h2>
-                <p className="text-violet-100/60 text-lg lg:text-xl leading-relaxed">Превращаем идеи в работающие цифровые продукты с высокой конверсией.</p>
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                   <div className="px-4 py-2 bg-violet-900/50 border border-violet-800 rounded-lg text-violet-300 text-xs font-mono">React</div>
-                   <div className="px-4 py-2 bg-violet-900/50 border border-violet-800 rounded-lg text-violet-300 text-xs font-mono">Node.js</div>
-                   <div className="px-4 py-2 bg-violet-900/50 border border-violet-800 rounded-lg text-violet-300 text-xs font-mono">AWS</div>
-                </div>
-              </div>
-              <div className="flex-1 flex justify-center">
-                <div className="relative">
-                   <div className="w-48 h-64 sm:w-64 sm:h-80 bg-violet-500/20 rounded-2xl border border-violet-500/30 backdrop-blur-xl animate-pulse" />
-                   <div className="absolute -top-6 -left-6 w-48 h-64 sm:w-64 sm:h-80 bg-violet-500/10 rounded-2xl border border-violet-500/20 backdrop-blur-xl rotate-6" />
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="py-24 px-6 border-t border-slate-100 transition-colors duration-1000 bg-white/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-16 lg:gap-20">
-          <div className="max-w-sm space-y-8 text-center lg:text-left mx-auto lg:mx-0">
+      <footer className="py-20 px-6 border-t border-slate-100 bg-white/80 backdrop-blur-md mb-20 lg:mb-0">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-12">
+          <div className="max-w-sm space-y-6 text-center lg:text-left mx-auto lg:mx-0">
             <div className="flex items-center justify-center lg:justify-start gap-2">
-              <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold text-xl">G</div>
-              <span className="text-2xl font-bold">Go Gravity</span>
+              <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white font-bold">G</div>
+              <span className="text-xl font-bold">Go Gravity</span>
             </div>
-            <p className="text-slate-400 text-lg leading-relaxed font-medium">Студия разработки ПО. Три направления — одна безупречная экспертиза в создании цифрового будущего.</p>
+            <p className="text-slate-400 text-sm font-medium">Студия разработки ПО. Три направления — одна безупречная экспертиза.</p>
           </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-10 lg:gap-16">
-            <div className="space-y-6">
-              <div className="font-bold text-[10px] uppercase tracking-[0.3em] text-slate-900">Enterprise</div>
-              <ul className="space-y-4 text-slate-500 text-sm font-semibold">
-                <li><a href="#" className="hover:text-blue-600 transition-colors">VR Тренажеры</a></li>
-                <li><a href="#" className="hover:text-blue-600 transition-colors">3D Атласы</a></li>
-              </ul>
-            </div>
-            <div className="space-y-6">
-              <div className="font-bold text-[10px] uppercase tracking-[0.3em] text-slate-900">Digital</div>
-              <ul className="space-y-4 text-slate-500 text-sm font-semibold">
-                <li><a href="#" className="hover:text-indigo-600 transition-colors">Gamedev</a></li>
-                <li><a href="#" className="hover:text-violet-600 transition-colors">Web Apps</a></li>
-              </ul>
-            </div>
-            <div className="space-y-6">
-              <div className="font-bold text-[10px] uppercase tracking-[0.3em] text-slate-900">Go Gravity</div>
-              <div className="text-slate-500 text-sm font-semibold leading-relaxed">hello@go-gravity.ru<br/>г. Москва, IT-Hub</div>
-            </div>
+          <div className="flex justify-center gap-12 text-slate-500 text-sm font-bold uppercase tracking-widest">
+            <a href="#" className="hover:text-slate-900 transition-colors">Cases</a>
+            <a href="#" className="hover:text-slate-900 transition-colors">Team</a>
+            <a href="#" className="hover:text-slate-900 transition-colors">Contact</a>
           </div>
-        </div>
-        <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-slate-100 text-[10px] text-slate-400 font-bold uppercase tracking-[0.4em] flex flex-col sm:flex-row justify-between gap-4 text-center">
-           <div>© 2024 Go Gravity development unit</div>
-           <div className="hidden sm:block">Built with high-end architecture</div>
         </div>
       </footer>
     </div>
