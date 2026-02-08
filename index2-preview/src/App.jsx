@@ -19,11 +19,7 @@ import {
   Cloud,
   Briefcase,
   Mail,
-  Phone,
-  MapPin,
-  Send,
-  Gamepad2,
-  Globe
+  Gamepad2
 } from 'lucide-react';
 
 const App = () => {
@@ -32,7 +28,14 @@ const App = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const TELEGRAM_URL = 'https://t.me/gocode_studio';
+  const MAIL_TO_URL = 'mailto:hello@gogravity.tech';
+  const openTelegram = () => window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
+
+  const viewModeLabels = { b2b: 'VR/3D', games: 'GAMEDEV', web: 'WEB' };
+  const currentViewModeLabel = viewModeLabels[viewMode] || viewMode.toUpperCase();
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -96,14 +99,105 @@ const App = () => {
 
   const projectItems = {
     b2b: [
-      { id: 'project-refinery', title: "Симулятор НПЗ", category: "VR Training", year: "2023", client: "Роснефть", description: "Полная виртуальная копия нефтеперерабатывающего завода для отработки аварийных ситуаций." },
-      { id: 'project-twin', title: "Цифровой двойник цеха", category: "3D Digital Twin", year: "2024", client: "Норникель", description: "Система мониторинга производственных показателей в реальном времени на базе 3D-модели." }
+      {
+        id: 'project-vr-rzd',
+        title: 'Локомотив VR для РЖД',
+        category: 'VR',
+        client: 'РЖД',
+        description: 'VR-проект для презентации/обучения с интерактивными сценариями.',
+        media: [
+          { type: 'pdf', title: 'Презентация (PDF)', src: 'projects/Локомотив VR для РЖД.pdf' }
+        ]
+      },
+      {
+        id: 'project-cgi-ads',
+        title: 'CGI Ads',
+        category: 'CGI',
+        description: 'Видеоматериалы по CGI-проекту: ролик, рендер и таймлайн.',
+        media: [
+          { type: 'video', title: 'Видео-презентация', src: 'projects/Video presentation CGI Ads.mov' },
+          { type: 'video', title: 'Demo render', src: 'projects/Demo render 1.mov' },
+          { type: 'video', title: 'Cooker timeline', src: 'projects/Cooker Timeline 2.mov' }
+        ]
+      },
+      {
+        id: 'project-cgi-demo',
+        title: 'CGI Demo',
+        category: 'CGI',
+        description: 'Демонстрационный CGI-ролик.',
+        media: [
+          { type: 'video', title: 'CGI Demo', src: 'projects/CGI Demo.mp4' }
+        ]
+      },
+      {
+        id: 'project-cgi-cartoon',
+        title: 'CGI Cartoon',
+        category: 'CGI',
+        description: 'Стилизованный CGI-мульт.',
+        media: [
+          { type: 'video', title: 'CGI Cartoon', src: 'projects/CGI Cartoon.mp4' }
+        ]
+      },
+      {
+        id: 'project-3d-skaven',
+        title: '3D модель (Skaven)',
+        category: '3D',
+        description: '3D-модель персонажа: демонстрация качества и детализации.',
+        media: [
+          { type: 'video', title: '3D model skaven', src: 'projects/3D model skaven.mp4' }
+        ]
+      }
     ],
     games: [
-      { id: 'project-star-drifter', title: "Star Drifter: Odyssey", category: "Mobile RPG", year: "2024", client: "Indie Publisher", description: "Космическая ролевая игра с процедурной генерацией планет." }
+      {
+        id: 'project-shooter-proto',
+        title: 'Прототип шутера',
+        category: 'Gameplay',
+        description: 'Две версии демо геймплея прототипа.',
+        media: [
+          { type: 'video', title: 'Shooter demo', src: 'projects/shoter game.mp4' },
+          { type: 'video', title: 'Shooter demo 2', src: 'projects/shoter game 2.mp4' }
+        ]
+      },
+      {
+        id: 'project-fight-proto',
+        title: 'Прототип файтинга',
+        category: 'Gameplay',
+        description: 'Геймплейные демо прототипа.',
+        media: [
+          { type: 'video', title: 'Fight demo', src: 'projects/fight game.mp4' },
+          { type: 'video', title: 'Fight demo 2', src: 'projects/fight game video 2.mp4' }
+        ]
+      },
+      {
+        id: 'project-space-demo',
+        title: 'Космическая игра (демо)',
+        category: 'Gameplay',
+        description: 'Демо геймплея.',
+        media: [
+          { type: 'video', title: 'Space game demo', src: 'projects/space game.mp4' }
+        ]
+      },
+      {
+        id: 'project-crazy-gan',
+        title: 'Crazy gan game (демо)',
+        category: 'Gameplay',
+        description: 'Демо геймплея.',
+        media: [
+          { type: 'video', title: 'Crazy gan game demo', src: 'projects/crazy gan game.mp4' }
+        ]
+      }
     ],
     web: [
-      { id: 'project-fintech', title: "FinTech Dashboard", category: "SaaS", year: "2024", client: "Alpha Bank", description: "Многофункциональная панель управления финансовыми потоками для крупных холдингов." }
+      {
+        id: 'project-uae-panel',
+        title: 'Интерактивная панель для недвижимости в ОАЭ',
+        category: 'Web',
+        description: 'Интерактивная панель/презентация для недвижимости: структура, сценарии, UI.',
+        media: [
+          { type: 'pdf', title: 'Презентация (PDF)', src: 'projects/Интерактивная панель для недвижимости в ОАЭ.pdf' }
+        ]
+      }
     ]
   };
 
@@ -129,7 +223,10 @@ const App = () => {
   const Breadcrumbs = () => {
     if (activePage === 'home') return null;
     
-    let path = [{ label: 'Главная', page: 'home' }];
+    let path = [
+      { label: 'Главная', page: 'home' },
+      { label: currentViewModeLabel, page: 'home' }
+    ];
     
     if (activePage === 'projects') {
       path.push({ label: 'Проекты', page: 'projects' });
@@ -158,25 +255,6 @@ const App = () => {
       </div>
     );
   };
-
-  const ContactModal = () => (
-    <div className={`fixed inset-0 z-[100] flex items-center justify-center px-6 transition-all duration-500 ${isModalOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-md" onClick={() => setIsModalOpen(false)} />
-      <div className="relative bg-white w-full max-w-xl rounded-[3rem] p-10 shadow-2xl animate-in zoom-in-95 duration-300">
-        <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><X /></button>
-        <h2 className="text-3xl font-black mb-2 uppercase text-slate-900">Начать проект</h2>
-        <p className="text-slate-500 mb-8 font-medium">Оставьте заявку, и мы свяжемся с вами в течение дня.</p>
-        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsModalOpen(false); }}>
-          <input type="text" placeholder="Ваше имя" className="w-full px-6 py-4 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-slate-200 outline-none font-bold text-slate-900" />
-          <input type="email" placeholder="Email" className="w-full px-6 py-4 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-slate-200 outline-none font-bold text-slate-900" />
-          <textarea placeholder="Опишите вашу задачу" rows="4" className="w-full px-6 py-4 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-slate-200 outline-none font-bold resize-none text-slate-900" />
-          <button className={`w-full py-5 rounded-2xl text-white font-bold flex items-center justify-center gap-2 transition-all ${currentTheme.accentBg} ${currentTheme.shadow}`}>
-            Отправить <Send size={18} />
-          </button>
-        </form>
-      </div>
-    </div>
-  );
 
   const Navbar = () => (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen ? 'bg-white/90 backdrop-blur-xl py-3 shadow-sm' : 'bg-transparent py-6'}`}>
@@ -249,10 +327,10 @@ const App = () => {
           </div>
 
           <button 
-            onClick={() => setIsModalOpen(true)}
+            onClick={openTelegram}
             className={`px-6 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-500 shadow-lg ${currentTheme.accentBg} ${currentTheme.shadow}`}
           >
-            Начать проект
+            Написать в Telegram
           </button>
         </div>
 
@@ -262,21 +340,20 @@ const App = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 p-8 space-y-8 shadow-2xl">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-100 p-6 shadow-2xl">
           <div className="grid gap-6">
-            <div className="space-y-4">
-               <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Меню</div>
-               <button onClick={() => { setActivePage('home'); setIsMobileMenuOpen(false); }} className="block text-2xl font-black text-slate-900">Главная</button>
-               <button onClick={() => { setActivePage('projects'); setIsMobileMenuOpen(false); }} className="block text-2xl font-black text-slate-900">Проекты</button>
-               <button onClick={() => setIsMobileMenuOpen(false)} className="block text-2xl font-black text-slate-900">Блог</button>
-               <button onClick={() => setIsMobileMenuOpen(false)} className="block text-2xl font-black text-slate-900">О студии</button>
+            <div className="space-y-3">
+              <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Навигация</div>
+              <button onClick={() => { setActivePage('home'); setIsMobileMenuOpen(false); }} className="block text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">Главная</button>
+              <button onClick={() => { setActivePage('projects'); setIsMobileMenuOpen(false); }} className="block text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">Проекты</button>
+              <button onClick={() => { openTelegram(); setIsMobileMenuOpen(false); }} className="block text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">Написать в Telegram</button>
             </div>
             <div className="h-px bg-slate-100 w-full" />
-            <div className="space-y-4">
-               <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Услуги {viewMode}</div>
-               {currentServices.map(s => (
-                 <button key={s.id} onClick={() => { setActivePage(s.id); setIsMobileMenuOpen(false); }} className="block text-xl font-bold text-slate-600">{s.title}</button>
-               ))}
+            <div className="space-y-3">
+              <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Услуги · {currentViewModeLabel}</div>
+              {currentServices.map(s => (
+                <button key={s.id} onClick={() => { setActivePage(s.id); setIsMobileMenuOpen(false); }} className="block text-base font-medium text-slate-700 hover:text-slate-900 transition-colors">{s.title}</button>
+              ))}
             </div>
           </div>
         </div>
@@ -285,17 +362,14 @@ const App = () => {
   );
 
   const MobileTabBar = () => (
-    <div className="lg:hidden fixed bottom-6 left-6 right-6 z-[60] bg-slate-900/90 backdrop-blur-xl rounded-3xl p-1.5 flex shadow-2xl border border-white/10">
+    <div className="lg:hidden fixed bottom-6 left-6 right-6 z-[60] bg-white/70 backdrop-blur-xl rounded-3xl p-1 flex shadow-xl border border-slate-200/70">
       {['b2b', 'games', 'web'].map((mode) => (
         <button 
           key={mode}
           onClick={() => handleViewModeChange(mode)}
-          className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all ${viewMode === mode ? 'bg-white text-slate-900' : 'text-slate-400'}`}
+          className={`flex-1 py-3 rounded-2xl transition-all text-[10px] font-semibold uppercase tracking-wider ${viewMode === mode ? 'bg-slate-900/10 text-slate-900' : 'text-slate-500 hover:text-slate-700'}`}
         >
-          {mode === 'b2b' ? <Box size={18} /> : mode === 'games' ? <Gamepad2 size={18} /> : <Globe size={18} />}
-          <span className="text-[9px] font-black uppercase mt-1 tracking-tighter">
-            {mode === 'b2b' ? 'VR&3D' : mode === 'games' ? 'Games' : 'Web'}
-          </span>
+          {mode === 'b2b' ? 'VR/3D' : mode === 'games' ? 'GAMEDEV' : 'WEB'}
         </button>
       ))}
     </div>
@@ -309,32 +383,72 @@ const App = () => {
             <Briefcase size={12} /> {project.category}
           </div>
           <h1 className="text-5xl md:text-8xl font-black text-slate-900 leading-[0.8] tracking-tighter uppercase">{project.title}</h1>
-          <div className="flex gap-12 border-y border-slate-100 py-8">
-            <div>
-              <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Клиент</div>
-              <div className="font-bold text-slate-900">{project.client}</div>
+          {(project.client || project.year) && (
+            <div className="grid grid-cols-2 gap-12 border-y border-slate-100 py-8">
+              <div className={project.client ? '' : 'opacity-0 pointer-events-none'}>
+                <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Клиент</div>
+                <div className="font-bold text-slate-900">{project.client}</div>
+              </div>
+              <div className={project.year ? '' : 'opacity-0 pointer-events-none'}>
+                <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Год</div>
+                <div className="font-bold text-slate-900">{project.year}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Год</div>
-              <div className="font-bold text-slate-900">{project.year}</div>
-            </div>
-          </div>
+          )}
           <p className="text-xl text-slate-500 font-medium leading-relaxed">{project.description}</p>
-          <div className="p-8 bg-slate-50 rounded-[2rem] border border-slate-100">
-             <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Результат этапа</div>
-             <p className="text-sm text-slate-600">Эффективность обучения персонала выросла на 40% за первые 3 месяца эксплуатации системы.</p>
-          </div>
+          <button onClick={openTelegram} className={`inline-flex items-center justify-center px-10 py-5 rounded-2xl font-bold text-white shadow-2xl ${currentTheme.accentBg}`}>
+            Написать в Telegram
+          </button>
         </div>
         
         <div className="space-y-6">
-          <div className="aspect-video bg-slate-100 rounded-[3rem] overflow-hidden flex items-center justify-center relative shadow-inner">
-            <div className={`absolute inset-0 opacity-20 bg-gradient-to-br ${currentTheme.accentBg}`} />
-            <div className="text-slate-300 font-black text-2xl uppercase tracking-[1em]">Project Image</div>
-          </div>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="aspect-square bg-slate-50 rounded-[2.5rem] border border-slate-100" />
-            <div className="aspect-square bg-slate-50 rounded-[2.5rem] border border-slate-100" />
-          </div>
+          {project.media?.length ? (
+            <>
+              {project.media.map((m, idx) => {
+                const url = encodeURI(m.src);
+                const label = m.title || (m.type === 'pdf' ? 'Презентация' : 'Видео');
+
+                return (
+                  <div key={`${m.src}-${idx}`} className="bg-white rounded-[3rem] border border-slate-100 p-4 shadow-xl">
+                    <div className="px-4 pt-3 pb-4">
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{label}</div>
+                    </div>
+
+                    {m.type === 'video' ? (
+                      <div className="px-4 pb-4 space-y-3">
+                        <video
+                          src={url}
+                          controls
+                          playsInline
+                          preload="metadata"
+                          className="w-full rounded-[2.5rem] border border-slate-100 bg-black/5"
+                        />
+                        <a href={url} target="_blank" rel="noreferrer" className={`inline-flex text-xs font-bold uppercase tracking-widest ${currentTheme.primary} hover:underline`}>
+                          Открыть видео в новой вкладке
+                        </a>
+                      </div>
+                    ) : (
+                      <div className="px-4 pb-4 space-y-3">
+                        <a href={url} target="_blank" rel="noreferrer" className={`inline-flex text-xs font-bold uppercase tracking-widest ${currentTheme.primary} hover:underline`}>
+                          Открыть PDF в новой вкладке
+                        </a>
+                        <iframe
+                          title={label}
+                          src={url}
+                          className="w-full h-[520px] rounded-[2.5rem] border border-slate-100 bg-white"
+                        />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </>
+          ) : (
+            <div className="aspect-video bg-slate-100 rounded-[3rem] overflow-hidden flex items-center justify-center relative shadow-inner">
+              <div className={`absolute inset-0 opacity-20 bg-gradient-to-br ${currentTheme.accentBg}`} />
+              <div className="text-slate-300 font-black text-2xl uppercase tracking-[1em]">Project</div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -350,7 +464,7 @@ const App = () => {
           <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-[0.9] tracking-tighter uppercase">{service.title}</h1>
           <p className="text-xl text-slate-500 font-medium leading-relaxed">{service.longDesc || service.description}</p>
           <div className="pt-8 flex gap-4">
-            <button onClick={() => setIsModalOpen(true)} className={`px-10 py-5 rounded-2xl font-bold text-white shadow-2xl ${currentTheme.accentBg}`}>Обсудить проект</button>
+            <button onClick={openTelegram} className={`px-10 py-5 rounded-2xl font-bold text-white shadow-2xl ${currentTheme.accentBg}`}>Написать в Telegram</button>
           </div>
         </div>
         <div className="bg-white rounded-[3rem] border border-slate-100 p-10 shadow-xl">
@@ -373,30 +487,40 @@ const App = () => {
     <div className="max-w-7xl mx-auto px-6 pt-32 pb-20 animate-in fade-in duration-700">
       <div className="mb-16">
         <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-4 uppercase tracking-tighter text-slate-900">Наши проекты</h1>
-        <p className="text-slate-500 text-xl font-medium">Портфолио в сегменте <span className={currentTheme.primary}>{viewMode.toUpperCase()}</span></p>
+        <p className="text-slate-500 text-xl font-medium">Портфолио в сегменте <span className={currentTheme.primary}>{currentViewModeLabel}</span></p>
       </div>
       <div className="grid md:grid-cols-2 gap-8">
-        {currentProjects.map((project) => (
-          <button 
-            key={project.id}
-            onClick={() => setActivePage(project.id)}
-            className="group text-left relative rounded-[2.5rem] bg-white border border-slate-100 p-4 transition-all hover:shadow-2xl"
-          >
-            <div className="aspect-[16/10] bg-slate-100 rounded-[2rem] mb-6 flex items-center justify-center relative overflow-hidden text-slate-900">
-               <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${currentTheme.accentBg}`} />
-               <div className="text-slate-200 font-black text-2xl uppercase tracking-widest">{project.title}</div>
-            </div>
-            <div className="px-4 pb-4 flex justify-between items-end">
-              <div>
-                <div className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${currentTheme.primary}`}>{project.category}</div>
-                <h3 className="text-2xl font-black text-slate-900">{project.title}</h3>
+        {currentProjects.map((project) => {
+          const primaryMedia = project.media?.[0];
+          const mediaTag = primaryMedia ? (primaryMedia.type === 'pdf' ? 'PDF' : 'VIDEO') : null;
+
+          return (
+            <button 
+              key={project.id}
+              onClick={() => setActivePage(project.id)}
+              className="group text-left relative rounded-[2.5rem] bg-white border border-slate-100 p-4 transition-all hover:shadow-2xl"
+            >
+              <div className="aspect-[16/10] bg-slate-100 rounded-[2rem] mb-6 flex items-center justify-center relative overflow-hidden text-slate-900">
+                <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${currentTheme.accentBg}`} />
+                <div className="text-slate-200 font-black text-2xl uppercase tracking-widest text-center px-6">{project.title}</div>
+                {mediaTag && (
+                  <div className="absolute bottom-4 left-4 px-3 py-1 rounded-full bg-white/70 backdrop-blur text-[10px] font-semibold uppercase tracking-widest text-slate-700 border border-white/50">
+                    {mediaTag}
+                  </div>
+                )}
               </div>
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white ${currentTheme.accentBg} opacity-0 group-hover:opacity-100 transition-all`}>
-                <ChevronRight size={20} />
+              <div className="px-4 pb-4 flex justify-between items-end">
+                <div>
+                  <div className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${currentTheme.primary}`}>{project.category}</div>
+                  <h3 className="text-2xl font-black text-slate-900">{project.title}</h3>
+                </div>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white ${currentTheme.accentBg} opacity-0 group-hover:opacity-100 transition-all`}>
+                  <ChevronRight size={20} />
+                </div>
               </div>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -448,10 +572,10 @@ const App = () => {
             <button 
               key={service.id}
               onClick={() => setActivePage(service.id)}
-              className={`group p-8 rounded-[2.5rem] border transition-all hover:-translate-y-2 flex flex-col justify-between min-h-[300px] text-left ${service.id.includes('vr-sim') ? `${currentTheme.accentLight} ${currentTheme.border} shadow-lg` : 'bg-white/70 border-slate-100'}`}
+              className={`group p-8 rounded-[2.5rem] border transition-all hover:-translate-y-2 flex flex-col justify-between min-h-[300px] text-left ${(service.id === 'service-vr-sim' || service.id === 'service-3d-atlas') ? `${currentTheme.accentLight} ${currentTheme.border} shadow-lg` : 'bg-white/70 border-slate-100'}`}
             >
               <div>
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${service.id.includes('vr-sim') ? `${currentTheme.accentBg} text-white` : 'bg-slate-100 text-slate-600'}`}>
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${(service.id === 'service-vr-sim' || service.id === 'service-3d-atlas') ? `${currentTheme.accentBg} text-white` : 'bg-slate-100 text-slate-600'}`}>
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{service.title}</h3>
@@ -468,61 +592,51 @@ const App = () => {
   );
 
   const Footer = () => (
-    <footer className="pt-24 pb-12 px-6 border-t border-slate-100 bg-white/80 backdrop-blur-md text-slate-900">
+    <footer className="pt-20 pb-12 px-6 border-t border-slate-100 bg-white/70 backdrop-blur-md text-slate-900">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-14">
           <div className="space-y-6">
             <button onClick={() => setActivePage('home')} className="flex items-center gap-3">
               <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white font-bold">G</div>
               <span className="text-xl font-bold text-slate-900">Go Gravity</span>
             </button>
-            <p className="text-sm text-slate-500 leading-relaxed max-w-[240px]">Создаем цифровое будущее через инновационные VR, Game и Web решения.</p>
+            <p className="text-sm text-slate-500 leading-relaxed max-w-[320px]">
+              Разрабатываем VR/3D продукты, игры и веб-сервисы. Основаны в 2018.
+            </p>
+            <button onClick={openTelegram} className={`text-sm font-semibold ${currentTheme.primary} hover:underline`}>
+              Написать в Telegram
+            </button>
           </div>
 
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8">Проекты</h4>
-            <ul className="space-y-4 text-sm font-bold text-slate-600">
-              <li><button onClick={() => {setViewMode('b2b'); setActivePage('projects');}} className="hover:text-slate-900">VR & 3D для бизнеса</button></li>
-              <li><button onClick={() => {setViewMode('games'); setActivePage('projects');}} className="hover:text-slate-900">Игровые проекты</button></li>
-              <li><button onClick={() => {setViewMode('web'); setActivePage('projects');}} className="hover:text-slate-900">Web & SaaS решения</button></li>
+            <h4 className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-6">Навигация</h4>
+            <ul className="space-y-3 text-sm font-semibold text-slate-600">
+              <li><button onClick={() => setActivePage('home')} className="hover:text-slate-900 transition-colors">Главная</button></li>
+              <li><button onClick={() => setActivePage('projects')} className="hover:text-slate-900 transition-colors">Проекты</button></li>
+              <li><button onClick={() => setActivePage(allServices[viewMode][0].id)} className="hover:text-slate-900 transition-colors">Услуги</button></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8">Компания</h4>
-            <ul className="space-y-4 text-sm font-bold text-slate-600">
-              <li><button onClick={() => setIsModalOpen(true)} className="hover:text-slate-900">О студии</button></li>
-              <li><button onClick={() => setIsModalOpen(true)} className="hover:text-slate-900">Блог</button></li>
-              <li><button onClick={() => setIsModalOpen(true)} className="hover:text-slate-900">Карьера</button></li>
-              <li><button onClick={() => setIsModalOpen(true)} className="hover:text-slate-900">Команда</button></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8">Контакты</h4>
-            <ul className="space-y-4 text-sm font-bold text-slate-900">
-              <li className="flex items-start gap-3 text-slate-900">
-                <MapPin size={18} className="text-slate-400 shrink-0" />
-                <span>Москва, Пресненская наб., 12, офис 45 (Плейсхолдер)</span>
+            <h4 className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-6">Контакты</h4>
+            <ul className="space-y-3 text-sm font-semibold text-slate-600">
+              <li className="flex items-center gap-3">
+                <span className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500">
+                  <Mail size={16} />
+                </span>
+                <a href={MAIL_TO_URL} className="hover:text-slate-900 transition-colors">hello@gogravity.tech</a>
               </li>
-              <li className="flex items-center gap-3 text-slate-900">
-                <Mail size={18} className="text-slate-400 shrink-0" />
-                <a href="mailto:hello@gogravity.tech" className="hover:underline">hello@gogravity.tech</a>
-              </li>
-              <li className="flex items-center gap-3 text-slate-900">
-                <Phone size={18} className="text-slate-400 shrink-0" />
-                <a href="tel:+74950000000" className="hover:underline">+7 (495) 000-00-00</a>
+              <li className="flex items-center gap-3">
+                <span className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 font-black">@</span>
+                <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="hover:text-slate-900 transition-colors">@gocode_studio</a>
               </li>
             </ul>
           </div>
         </div>
         
-        <div className="pt-12 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-          <p>© 2024 Go Gravity Studio. Все права защищены.</p>
-          <div className="flex gap-8">
-            <button className="hover:text-slate-900 transition-colors">Политика конфиденциальности</button>
-            <button className="hover:text-slate-900 transition-colors">Условия использования</button>
-          </div>
+        <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-semibold uppercase tracking-widest text-slate-400">
+          <p>© 2018–{currentYear} Go Gravity Studio</p>
+          <p>VR/3D • GameDev • Web</p>
         </div>
       </div>
     </footer>
@@ -552,7 +666,6 @@ const App = () => {
       {/* Force page-level remount only when route changes (keeps hover menu state from retriggering page animations). */}
       <div key={activePage}>{renderContent()}</div>
       {Footer()}
-      {ContactModal()}
       {MobileTabBar()}
     </div>
   );
