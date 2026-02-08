@@ -198,20 +198,24 @@ const App = () => {
             </button>
 
             {isLogoMenuOpen && (
-              <div className="absolute top-full left-0 w-56 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
-                  <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><Info size={16} /></div>
-                  <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">О студии</div>
-                </button>
-                <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
-                  <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><BookOpen size={16} /></div>
-                  <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">Блог</div>
-                </button>
-                <button onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
-                  <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><MessageSquare size={16} /></div>
-                  <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">Контакты</div>
-                </button>
-              </div>
+              <>
+                {/* Hover-bridge: закрывает "зазор" между кнопкой и меню, чтобы избежать мерцания при наведении */}
+                <div className="absolute top-full left-0 w-56 h-2 z-50" />
+                <div className="absolute top-full left-0 w-56 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                  <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
+                    <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><Info size={16} /></div>
+                    <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">О студии</div>
+                  </button>
+                  <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
+                    <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><BookOpen size={16} /></div>
+                    <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">Блог</div>
+                  </button>
+                  <button onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
+                    <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><MessageSquare size={16} /></div>
+                    <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">Контакты</div>
+                  </button>
+                </div>
+              </>
             )}
           </div>
         </div>
@@ -243,25 +247,29 @@ const App = () => {
               </button>
               
               {isServicesOpen && (
-                <div 
-                  className="absolute top-full right-0 w-64 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50"
-                >
-                  {currentServices.map(s => (
-                    <button 
-                      key={s.id}
-                      onClick={() => { setActivePage(s.id); setIsServicesOpen(false); }}
-                      className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left"
-                    >
-                      <div className={`p-2 rounded-lg ${currentTheme.accentLight} ${currentTheme.primary}`}>
-                        {s.icon}
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-slate-900">{s.title}</div>
-                        <div className="text-[10px] text-slate-400">Перейти</div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                <>
+                  {/* Hover-bridge: закрывает "зазор" между кнопкой и меню, чтобы избежать мерцания при наведении */}
+                  <div className="absolute top-full right-0 w-64 h-2 z-50" />
+                  <div 
+                    className="absolute top-full right-0 w-64 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50"
+                  >
+                    {currentServices.map(s => (
+                      <button 
+                        key={s.id}
+                        onClick={() => { setActivePage(s.id); setIsServicesOpen(false); }}
+                        className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left"
+                      >
+                        <div className={`p-2 rounded-lg ${currentTheme.accentLight} ${currentTheme.primary}`}>
+                          {s.icon}
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-slate-900">{s.title}</div>
+                          <div className="text-[10px] text-slate-400">Перейти</div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
 
