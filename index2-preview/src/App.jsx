@@ -130,7 +130,6 @@ const App = () => {
     web: { tag: 'Web Dev', title: "Проектируем ", accentTitle: "сложный WEB", desc: "Создаем современные веб-сервисы и высоконагруженные системы." }
   };
 
-  // Хлебные крошки
   const Breadcrumbs = () => {
     if (activePage === 'home') return null;
     
@@ -187,20 +186,19 @@ const App = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen ? 'bg-white/90 backdrop-blur-xl py-3 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-8">
-          {/* Контейнер логотипа с выпадающим меню при наведении */}
+          {/* Исправлено: Обертка для логотипа теперь имеет абсолютное позиционирование меню, чтобы не раздвигать контент */}
           <div 
-            className="relative group shrink-0"
+            className="relative shrink-0"
             onMouseEnter={() => setIsLogoMenuOpen(true)}
             onMouseLeave={() => setIsLogoMenuOpen(false)}
           >
-            <button onClick={() => setActivePage('home')} className="flex items-center gap-3 outline-none">
+            <button onClick={() => setActivePage('home')} className="flex items-center gap-3 outline-none group">
               <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold text-xl transition-transform group-hover:scale-105">G</div>
               <span className="text-2xl font-bold text-slate-900 tracking-tight">Go Gravity</span>
             </button>
 
-            {/* Выпадающее меню при наведении на логотип */}
             {isLogoMenuOpen && (
-              <div className="absolute top-full left-0 w-56 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 w-56 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                 <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
                   <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><Info size={16} /></div>
                   <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">О студии</div>
@@ -232,9 +230,13 @@ const App = () => {
 
         <div className="hidden md:flex items-center gap-2">
           <div className="flex items-center gap-2 mr-4">
-            <div className="relative group">
+            {/* Исправлено: Обертка для услуг теперь корректно обрабатывает onMouseLeave для закрытия */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsServicesOpen(true)}
+              onMouseLeave={() => setIsServicesOpen(false)}
+            >
               <button 
-                onMouseEnter={() => setIsServicesOpen(true)}
                 className={`flex items-center gap-1 text-sm font-bold px-4 py-2 transition-colors ${activePage.startsWith('service') ? currentTheme.primary : 'text-slate-600'}`}
               >
                 Услуги <ChevronDown size={14} className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
@@ -242,8 +244,7 @@ const App = () => {
               
               {isServicesOpen && (
                 <div 
-                  onMouseLeave={() => setIsServicesOpen(false)}
-                  className="absolute top-full right-0 w-64 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200"
+                  className="absolute top-full right-0 w-64 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50"
                 >
                   {currentServices.map(s => (
                     <button 
@@ -305,7 +306,6 @@ const App = () => {
     </nav>
   );
 
-  // Мобильный таб-бар для переключения направлений
   const MobileTabBar = () => (
     <div className="lg:hidden fixed bottom-6 left-6 right-6 z-[60] bg-slate-900/90 backdrop-blur-xl rounded-3xl p-1.5 flex shadow-2xl border border-white/10">
       {['b2b', 'games', 'web'].map((mode) => (
@@ -441,7 +441,6 @@ const App = () => {
                 Все проекты
               </button>
               
-              {/* Технологический стек - сделан более незаметным (мельче и светлее) */}
               <div className="text-left hidden sm:block">
                 <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400/80">
                   {currentTheme.techStack}
