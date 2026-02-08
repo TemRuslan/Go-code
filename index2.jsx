@@ -559,30 +559,31 @@ const App = () => {
   );
 
   const renderContent = () => {
-    if (activePage === 'projects') return <ProjectsListPage />;
+    if (activePage === 'projects') return ProjectsListPage();
     
     const foundService = Object.values(allServices).flat().find(s => s.id === activePage);
-    if (foundService) return <ServiceDetailPage service={foundService} />;
+    if (foundService) return ServiceDetailPage({ service: foundService });
 
     const foundProject = Object.values(projectItems).flat().find(p => p.id === activePage);
-    if (foundProject) return <ProjectDetailPage project={foundProject} />;
+    if (foundProject) return ProjectDetailPage({ project: foundProject });
     
     return (
       <>
-        <Hero />
-        <ServiceCards />
+        {Hero()}
+        {ServiceCards()}
       </>
     );
   };
 
   return (
     <div className={`min-h-screen font-sans text-slate-900 overflow-x-hidden transition-colors duration-1000 bg-gradient-to-br pb-32 lg:pb-0 ${currentTheme.bgGradient}`}>
-      <Navbar />
-      <Breadcrumbs />
-      {renderContent()}
-      <Footer />
-      <ContactModal />
-      <MobileTabBar />
+      {Navbar()}
+      {Breadcrumbs()}
+      {/* Force page-level remount only when route changes (keeps hover menu state from retriggering page animations). */}
+      <div key={activePage}>{renderContent()}</div>
+      {Footer()}
+      {ContactModal()}
+      {MobileTabBar()}
     </div>
   );
 };
