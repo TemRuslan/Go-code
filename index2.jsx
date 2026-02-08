@@ -110,6 +110,54 @@ const App = () => {
         ]
       },
       {
+        id: 'project-gkee',
+        title: 'Элемент (gkee.ru)',
+        category: 'B2B',
+        url: 'https://gkee.ru/',
+        description: 'Корпоративный сайт производителя газопоршневых установок (ГПУ) 150-500 кВт и сервисного обслуживания.',
+        highlights: [
+          'Структура: линейка продукции + преимущества + сервис 24/7',
+          'Четкие CTA и навигация по продуктам',
+          'Адаптивная верстка'
+        ]
+      },
+      {
+        id: 'project-mosmining',
+        title: 'МосМайнинг (mosmining.ru)',
+        category: 'B2B',
+        url: 'https://mosmining.ru/',
+        description: 'Сайт производителя контейнеров для майнинга: готовые решения под ключ, производство с 2018 года.',
+        highlights: [
+          'Лендинг/каталог решений с акцентом на характеристики и комплектации',
+          'Формы захвата и маршрутизация лидов',
+          'SEO-структура страниц'
+        ]
+      },
+      {
+        id: 'project-ecml',
+        title: 'ИЦ МН (ecml.ru)',
+        category: 'B2B',
+        url: 'https://ecml.ru/',
+        description: 'Инжиниринговый центр: разработка и производство оборудования для технологических процессов, включая ALD.',
+        highlights: [
+          'Структура для R&D: технологии, направления, проекты',
+          'Адаптивный контент под научную/инженерную аудиторию',
+          'Упор на понятную подачу сложных тем'
+        ]
+      },
+      {
+        id: 'project-btcvent',
+        title: 'БелТехКом (btcvent.ru)',
+        category: 'B2B',
+        url: 'https://btcvent.ru/',
+        description: 'Завод вентиляционных установок и промышленных вентиляторов: ПВУ, теплообменники, автоматика.',
+        highlights: [
+          'Подача производства и номенклатуры',
+          'Точечные страницы под направления/оборудование',
+          'Контактные сценарии для B2B'
+        ]
+      },
+      {
         id: 'project-cgi-ads',
         title: 'CGI Ads',
         category: 'CGI',
@@ -196,6 +244,42 @@ const App = () => {
         description: 'Интерактивная панель/презентация для недвижимости: структура, сценарии, UI.',
         media: [
           { type: 'pdf', title: 'Презентация (PDF)', src: 'projects/Интерактивная панель для недвижимости в ОАЭ.pdf' }
+        ]
+      },
+      {
+        id: 'project-aipool',
+        title: 'AI Pool',
+        category: 'Landing',
+        url: 'https://tsite.ct.ws/aipool/index.html',
+        description: 'Лендинг сервиса GPU-monetization: децентрализованный AI farming, ценностное предложение, блоки доверия и конверсии.',
+        highlights: [
+          'Сильный hero + метрики/соц.доказательства',
+          'Секции “проблема/решение”, преимущества, FAQ',
+          'Стиль: liquid glass, современная типографика'
+        ]
+      },
+      {
+        id: 'project-anzirat',
+        title: 'Dr. Anzirat',
+        category: 'Landing',
+        url: 'https://tsite.ct.ws/anzirat.html?i=2#',
+        description: 'Имиджевый лендинг врача/клиники: позиционирование, услуги, доверие, сценарии контакта.',
+        highlights: [
+          'Аккуратная медицинская эстетика (soft glass)',
+          'Блоки услуг и выгод, форма/контакты',
+          'Адаптив под мобайл'
+        ]
+      },
+      {
+        id: 'project-apertura',
+        title: 'Apertura.group',
+        category: 'Website',
+        url: 'https://www.apertura.group/',
+        description: 'Многостраничный корпоративный сайт технологической/исследовательской тематики (продукты/технологии/проекты).',
+        highlights: [
+          'Структура под B2B/tech: технологии, кейсы, контакты',
+          'Качественная типографика и сетки',
+          'Мультиязычный/международный контекст'
         ]
       }
     ]
@@ -635,7 +719,10 @@ const App = () => {
         </div>
         
         <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-semibold uppercase tracking-widest text-slate-400">
-          <p>© 2018–{currentYear} Go Gravity Studio</p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-center md:text-left">
+            <p>© 2018–{currentYear} Go Gravity Studio</p>
+            <p className="text-slate-400/80">ООО &quot;Бирит&quot; · ИНН: 0500028237</p>
+          </div>
           <p>VR/3D • GameDev • Web</p>
         </div>
       </div>
