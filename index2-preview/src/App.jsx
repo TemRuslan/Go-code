@@ -23,10 +23,7 @@ import {
   MapPin,
   Send,
   Gamepad2,
-  Globe,
-  Info,
-  BookOpen,
-  MessageSquare
+  Globe
 } from 'lucide-react';
 
 const App = () => {
@@ -35,7 +32,6 @@ const App = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isLogoMenuOpen, setIsLogoMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -186,37 +182,11 @@ const App = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen ? 'bg-white/90 backdrop-blur-xl py-3 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-8">
-          {/* Исправлено: Обертка для логотипа теперь имеет абсолютное позиционирование меню, чтобы не раздвигать контент */}
-          <div 
-            className="relative shrink-0"
-            onMouseEnter={() => setIsLogoMenuOpen(true)}
-            onMouseLeave={() => setIsLogoMenuOpen(false)}
-          >
+          <div className="shrink-0">
             <button onClick={() => setActivePage('home')} className="flex items-center gap-3 outline-none group">
               <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold text-xl transition-transform group-hover:scale-105">G</div>
               <span className="text-2xl font-bold text-slate-900 tracking-tight">Go Gravity</span>
             </button>
-
-            {isLogoMenuOpen && (
-              <>
-                {/* Hover-bridge: закрывает "зазор" между кнопкой и меню, чтобы избежать мерцания при наведении */}
-                <div className="absolute top-full left-0 w-56 h-2 z-50" />
-                <div className="absolute top-full left-0 w-56 bg-white border border-slate-100 shadow-2xl rounded-3xl p-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                  <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
-                    <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><Info size={16} /></div>
-                    <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">О студии</div>
-                  </button>
-                  <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
-                    <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><BookOpen size={16} /></div>
-                    <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">Блог</div>
-                  </button>
-                  <button onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})} className="w-full flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors text-left group/item">
-                    <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover/item:bg-slate-900 group-hover/item:text-white transition-all"><MessageSquare size={16} /></div>
-                    <div className="text-xs font-bold text-slate-900 uppercase tracking-widest">Контакты</div>
-                  </button>
-                </div>
-              </>
-            )}
           </div>
         </div>
 
